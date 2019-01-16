@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 
 // Redux
 import { connect } from "react-redux";
@@ -13,6 +12,17 @@ class Login extends Component {
     password: "",
     errors: {}
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
 
   onChange = e => {
     this.setState({
@@ -26,11 +36,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.props.loginUser(user, this.props.history);
-    // axios
-    //   .post("/api/users/login", user)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => this.setState({ errors: err.response.data }));
+    this.props.loginUser(user);
   };
 
   render() {
@@ -82,10 +88,17 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   loginUser: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
 export default connect(
-  null,
-  loginUser
-)(withRouter(Login));
+  mapStateToProps,
+  { loginUser }
+)(Login);
