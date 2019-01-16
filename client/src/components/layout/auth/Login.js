@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import classnames from "classnames";
+
 import PropTypes from "prop-types";
+
+// TextFieldGroup
+import TextFieldGroup from "../../common/TextFieldGroup";
 
 // Redux
 import { connect } from "react-redux";
@@ -53,36 +56,24 @@ class Login extends Component {
         onSubmit={this.onSubmit}
       >
         <h2>Login</h2>
-        <div className="form-group">
-          <label>Email address</label>
-          <input
-            type="email"
-            className={classnames("form-control form-control-lg", {
-              "is-invalid": errors.email
-            })}
-            name="email"
-            placeholder="Enter email"
-            onChange={this.onChange}
-          />
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            className={classnames("form-control form-control-lg", {
-              "is-invalid": errors.password
-            })}
-            name="password"
-            placeholder="Password"
-            onChange={this.onChange}
-          />
-          {errors.password && (
-            <div className="invalid-feedback">{errors.password}</div>
-          )}
-        </div>
+        <TextFieldGroup
+          name="email"
+          value={this.state.email}
+          type="email"
+          placeholder="Email"
+          onChange={this.onChange}
+          error={errors.email}
+          labels="Email address"
+        />
+        <TextFieldGroup
+          name="password"
+          value={this.state.password}
+          type="password"
+          placeholder="Password"
+          onChange={this.onChange}
+          error={errors.password}
+          labels="Your password"
+        />
 
         <button type="submit" className="btn btn-primary">
           Submit
