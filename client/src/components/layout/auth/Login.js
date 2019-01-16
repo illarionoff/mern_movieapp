@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import axios from "axios";
+import classnames from "classnames";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    errors: {}
   };
 
   onChange = e => {
@@ -18,32 +21,50 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(user);
+    axios
+      .post("/api/users/login", user)
+      .then(res => console.log(res.data))
+      .catch(err => this.setState({ errors: err.response.data }));
   };
 
   render() {
+    const { errors } = this.state;
     return (
-      <form className="mx-auto col-md-6 mt-5" onSubmit={this.onSubmit}>
+      <form
+        noValidate
+        className="mx-auto col-md-6 mt-5"
+        onSubmit={this.onSubmit}
+      >
         <h2>Login</h2>
         <div className="form-group">
           <label>Email address</label>
           <input
             type="email"
-            className="form-control "
+            className={classnames("form-control form-control-lg", {
+              "is-invalid": errors.email
+            })}
             name="email"
             placeholder="Enter email"
             onChange={this.onChange}
           />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
         </div>
         <div className="form-group">
           <label>Password</label>
           <input
             type="password"
-            className="form-control"
+            className={classnames("form-control form-control-lg", {
+              "is-invalid": errors.password
+            })}
             name="password"
             placeholder="Password"
             onChange={this.onChange}
           />
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
         </div>
 
         <button type="submit" className="btn btn-primary">
