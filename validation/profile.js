@@ -7,6 +7,12 @@ module.exports = function validateProfileInput(data) {
   // Validate handle
   data.handle = !isEmpty(data.handle) ? data.handle : "";
 
+  // Validate sex
+  data.handle = !isEmpty(data.handle) ? data.handle : "";
+
+  // Validate location
+  data.handle = !isEmpty(data.handle) ? data.handle : "";
+
   if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
     errors.handle = "Handle must be between 2 and 40 characters";
   }
