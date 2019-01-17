@@ -8,16 +8,21 @@ module.exports = function validateProfileInput(data) {
   data.handle = !isEmpty(data.handle) ? data.handle : "";
 
   // Validate sex
-  data.handle = !isEmpty(data.handle) ? data.handle : "";
+  data.handle = !isEmpty(data.sex) ? data.handle : "";
 
   // Validate location
-  data.handle = !isEmpty(data.handle) ? data.handle : "";
+  data.handle = !isEmpty(data.location) ? data.handle : "";
 
-  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = "Handle must be between 2 and 40 characters";
-  }
   if (Validator.isEmpty(data.handle)) {
     errors.handle = "Handle is required";
+  }
+
+  if (Validator.isEmpty(data.location)) {
+    errors.location = "Location is required";
+  }
+
+  if (Validator.isEmpty(data.sex)) {
+    errors.sex = "Sex is required";
   }
 
   //   Social validator
