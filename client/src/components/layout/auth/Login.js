@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
@@ -50,35 +51,41 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form
-        noValidate
-        className="mx-auto col-md-6 mt-5"
-        onSubmit={this.onSubmit}
-      >
-        <h2>Login</h2>
-        <TextFieldGroup
-          name="email"
-          value={this.state.email}
-          type="email"
-          placeholder="Email"
-          onChange={this.onChange}
-          error={errors.email}
-          labels="Email address"
-        />
-        <TextFieldGroup
-          name="password"
-          value={this.state.password}
-          type="password"
-          placeholder="Password"
-          onChange={this.onChange}
-          error={errors.password}
-          labels="Your password"
-        />
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <section className="section-form">
+        <form
+          noValidate
+          className="section-form-input"
+          onSubmit={this.onSubmit}
+        >
+          <h2 className="section-form-title">Login</h2>
+          <TextFieldGroup
+            name="email"
+            value={this.state.email}
+            type="email"
+            placeholder="Email"
+            onChange={this.onChange}
+            error={errors.email}
+            labels="Email address"
+          />
+          <TextFieldGroup
+            name="password"
+            value={this.state.password}
+            type="password"
+            placeholder="Password"
+            onChange={this.onChange}
+            error={errors.password}
+            labels="Your password"
+          />
+          <div className="section-form-button">
+            <button type="submit" className="button button-green">
+              Submit
+            </button>
+            <Link to="/register" className="register-link">
+              <p>Create account</p>
+            </Link>
+          </div>
+        </form>
+      </section>
     );
   }
 }

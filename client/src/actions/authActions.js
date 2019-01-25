@@ -4,6 +4,9 @@ import jwt_decode from "jwt-decode";
 // Auth token
 import setAuthToken from "../utils/setAuthToken";
 
+// Movie action
+import { getMyMovies, clearMyMovies } from "./movieActions";
+
 // Actions
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
@@ -46,11 +49,12 @@ export const loginUser = (userData, history) => dispatch => {
 
 // Set Current User
 
-export const setCurrentUser = decoded => {
-  return {
+export const setCurrentUser = decoded => dispatch => {
+  dispatch({
     type: SET_CURRENT_USER,
     payload: decoded
-  };
+  });
+  dispatch(getMyMovies());
 };
 
 // Log user out
@@ -62,4 +66,5 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false);
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+  dispatch(clearMyMovies());
 };

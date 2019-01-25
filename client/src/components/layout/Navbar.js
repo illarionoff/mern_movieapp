@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+// Components
+import Logo from "../common/Logo";
+
 // Import actions
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
@@ -14,19 +17,21 @@ class Navbar extends Component {
     this.props.logoutUser();
   };
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <a href="#" onClick={this.onLogoutClick} className="nav-link">
-            <img
-              className="rounded-circle "
-              src={user.avatar}
-              alt={user.name}
-              title="You must have a Gravatar connected to your email to display an image"
-              style={{ width: "25px", marginRight: "5px" }}
-            />
+          <Link to="/dashboard" className="nav-link text-white">
+            MyPage
+          </Link>
+        </li>
+        <li className="nav-item">
+          <a
+            href="/"
+            onClick={this.onLogoutClick}
+            className="nav-link text-white"
+          >
             Logout
           </a>
         </li>
@@ -34,14 +39,18 @@ class Navbar extends Component {
     );
 
     const guestLinks = (
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav  ml-auto">
         <li className="nav-item">
-          <Link className="nav-link " to="/register" aria-disabled="true">
+          <Link
+            className="nav-link text-white"
+            to="/register"
+            aria-disabled="true"
+          >
             Sign up
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
+        <li className="nav-item ">
+          <Link className="nav-link text-white" to="/login">
             Login
           </Link>
         </li>
@@ -49,32 +58,30 @@ class Navbar extends Component {
     );
 
     return (
-      <div>
-        <nav className="navbar navbar-expand-sm navbar-light bg-secondary">
-          <div className="container">
-            <Link className="navbar-brand" to="/">
-              Navbar
-            </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
+      <nav className="navbar navbar-expand-sm navbar-transparent">
+        <div className="container">
+          <Link className="navbar-brand text-white" to="/">
+            <Logo />
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
 
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            />
-            {isAuthenticated ? authLinks : guestLinks}
-          </div>
-        </nav>
-      </div>
+          <div
+            className="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          />
+          {isAuthenticated ? authLinks : guestLinks}
+        </div>
+      </nav>
     );
   }
 }

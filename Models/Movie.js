@@ -7,7 +7,18 @@ const MovieSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-  title: {
+  adult: {
+    type: Boolean
+  },
+
+  id: {
+    type: Number,
+    required: true
+  },
+  original_language: {
+    type: String
+  },
+  original_title: {
     type: String,
     required: true
   },
@@ -15,17 +26,29 @@ const MovieSchema = new Schema({
     type: String,
     required: true
   },
-  release: {
+  popularity: {
+    type: Number,
+    required: true
+  },
+  poster_path: {
+    type: String
+  },
+  release_date: {
     type: String,
     required: true
   },
-  comment: {
+  title: {
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
+  video: {
+    type: Boolean
+  },
+  vote_average: {
+    type: Number
+  },
+  vote_count: {
+    type: Number
   }
 });
 

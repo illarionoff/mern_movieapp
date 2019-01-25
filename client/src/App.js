@@ -23,9 +23,10 @@ import Register from "./components/layout/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
+import MovieDetails from "./components/layout/movies/MovieDetails";
 
 // CSS
-import "./App.css";
+import "./App.scss";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -55,7 +56,7 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Main} />
-            <div className="container">
+            <React.Fragment>
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Switch>
@@ -75,10 +76,13 @@ class App extends Component {
                   component={EditProfile}
                 />
               </Switch>
-            </div>
-            <Footer />
+              <Switch>
+                <Route exact path="/details" component={MovieDetails} />
+              </Switch>
+            </React.Fragment>
           </div>
         </Router>
+        <Footer />
       </Provider>
     );
   }

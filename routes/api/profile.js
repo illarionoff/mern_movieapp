@@ -140,6 +140,80 @@ router.post(
   }
 );
 
+// @route GET api/profile/movies/all
+// @desc GET all movies
+// @access Private
+router.get(
+  "/movies/all",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "There is no profile for this user";
+          res.status(404).json(errors);
+        }
+        res.json(profile);
+      })
+      .catch(err =>
+        res.status(404).json({ profile: "There is no profile for this user" })
+      );
+  }
+);
+
+// @route POST api/profile/movies
+// @desc Add movies to user profile
+// @access Private
+router.post(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newMovie = {
+        adult: req.body.adult,
+        backdrop_path: req.body.backdrop_path,
+        movie_id: req.body.id,
+        original_language: req.body.original_language,
+        original_title: req.body.original_title,
+        overview: req.body.overview,
+        popularity: req.body.popularity,
+        poster_path: req.body.poster_path,
+        release_date: req.body.release_date,
+        title: req.body.title,
+        video: req.body.video,
+        vote_average: req.body.vote_average,
+        vote_count: req.body.vote_count
+      };
+
+      profile.movies.unshift(newMovie);
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+// @route DELETE api/profile/movies/:movie_id
+// @desc Delete movie from profile
+// @access Private
+router.delete(
+  "/movies/:movie_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        //  Get remove index
+        const removeIndex = profile.movies
+          .map(movie => movie.movie_id)
+          .indexOf(req.params.movie_id);
+        // Splice out of array
+        profile.movies.splice(removeIndex, 1);
+        // Save
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 // @route DELETE api/profile
 // @desc Delete user and profile
 // @access Private

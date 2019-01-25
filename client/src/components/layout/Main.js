@@ -1,24 +1,18 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 
-export default class Main extends Component {
-  render() {
-    return (
-      <div className="jumbotron">
-        <h1 className="display-4">Hello, world!</h1>
-        <p className="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr className="my-4" />
-        <p>
-          It uses utility classNamees for typography and spacing to space
-          content out within the larger container.
-        </p>
-        <Link className="btn btn-primary btn-lg" to="/login" role="button">
-          Login
-        </Link>
-      </div>
-    );
-  }
+// Components
+import TrendingList from "./movies/TrendingList";
+import Header from "./Header";
+import SearchItem from "./movies/SearchItem";
+import FeaturedItem from "./movies/FeaturedItem";
+
+export default function Main() {
+  return (
+    <>
+      <Header />
+      <TrendingList />
+      <SearchItem />
+      <FeaturedItem />
+    </>
+  );
 }

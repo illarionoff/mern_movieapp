@@ -52,18 +52,20 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateMovieInput(req.body);
-
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
     const newMovie = new Movie({
-      title: req.body.title,
+      adult: req.body.adult,
+      backdrop_path: req.body,
+      movie_id: req.body.id,
+      original_language: req.body.original_language,
+      original_title: req.body.original_title,
       overview: req.body.overview,
-      release: req.body.release,
-      comment: req.body.comment,
-      user: req.user.id
+      popularity: req.body.popularity,
+      poster_path: req.body.poster_path,
+      release_date: req.body.release_date,
+      title: req.body.title,
+      video: req.body.video,
+      vote_average: req.body.vote_average,
+      vote_count: req.body.vote_count
     });
     newMovie.save().then(movie => res.json(movie));
   }

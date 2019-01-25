@@ -1,0 +1,404 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fefefe;
+  padding: 30px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 600;
+  width: 150px;
+  padding: 15px 0;
+  margin: 10px 10px;
+  border-radius: 100px;
+  border: none;
+  display: inline-block;
+  color: white;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 15px 10px -10px rgba(0, 0, 0, 0.4);
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.button-red {
+  background-color: rgb(245, 98, 61);
+}
+.button-green {
+  background-color: rgb(29, 131, 29);
+}
+
+.button-add {
+  padding: 10px 0;
+  margin: 0 auto;
+}
+
+.App {
+  background: #fff;
+  position: relative;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  box-shadow: 11px -10px 52px -27px rgba(0, 0, 0, 0.75);
+  min-height: 100vh;
+}
+
+nav {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  height: 75px;
+  background: transparent;
+  z-index: 99;
+  width: 100%;
+  border-bottom: rgba(0, 0, 0, 0.993);
+}
+
+header {
+  height: 80vh;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(
+      rgba(241, 240, 240, 0.45),
+      rgba(238, 236, 236, 0.45)
+    ),
+    url("http://www.intothespiderverse.movie/images/share/shareImage.jpg");
+  background-size: cover;
+  background-position: top;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  .header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .header-title-primary {
+      display: block;
+    }
+    .header-title-secondary {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.section-trending {
+  width: 90%;
+  overflow: hidden;
+  background: #fff;
+  margin: 10px auto;
+  .section-trending-header {
+    padding: 50px 0;
+  }
+}
+.section-trending-body {
+  position: relative;
+}
+
+.carousel-image {
+  border-radius: 10px;
+  box-shadow: 2px -2px 52px -27px rgba(0, 0, 0, 0.75);
+}
+.vote {
+  position: absolute;
+  z-index: 99;
+  transform: translateY(-50px) translateX(10px);
+  display: block;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%; /* or 50% */
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+}
+.carousel-info {
+  text-align: center;
+  .carousel-info-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: black;
+
+    margin: 0.8rem;
+  }
+}
+
+.transparent {
+  background: transparent;
+}
+
+.section-search {
+  width: 90%;
+  margin: 10px auto;
+  .section-search-header {
+    padding: 50px 0;
+  }
+  .section-search-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding-bottom: 50px;
+    .form-search {
+      width: 75%;
+      .input-search {
+        width: 90%;
+        height: 50px;
+        border: 1px solid rgb(175, 175, 175);
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+        padding-left: 50px;
+        outline: none;
+      }
+      .button-search {
+        width: 50px;
+        height: 50px;
+        border: 1px solid rgb(175, 175, 175);
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        width: 10%;
+      }
+    }
+  }
+
+  .section-search-results {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .carousel-container {
+      padding: 30px;
+    }
+  }
+}
+
+.section-moviedetails {
+  height: 100vh;
+  width: 100%;
+
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  position: relative;
+  .back-button {
+    z-index: 100;
+    position: absolute;
+    top: 75px;
+    left: 75px;
+  }
+  .section-moviedetails-back {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    filter: blur(6px);
+  }
+
+  .section-moviedetails-body {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 25px;
+    position: absolute;
+    display: flex;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    color: #fff;
+    .section-moviedetails-body-image {
+      min-width: 200px;
+
+      border-radius: 25px;
+      img {
+        border-radius: 25px;
+        height: 100%;
+        max-width: 100%;
+        max-height: 300px;
+      }
+    }
+    .section-moviedetails-body-text {
+      min-width: 400px;
+      padding: 15px;
+      .section-moviedetails-title-primary {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .section-moviedetails-title-secondary {
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
+    .section-movie-details-vote {
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.section-form {
+  text-align: center;
+  background: linear-gradient(
+      rgba(241, 240, 240, 0.45),
+      rgba(238, 236, 236, 0.45)
+    ),
+    url("http://www.intothespiderverse.movie/images/share/shareImage.jpg");
+  background-size: cover;
+  background-position: top;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .section-form-input {
+    width: 300px;
+    margin-top: 150px;
+    margin-bottom: 100px;
+    .section-form-title {
+      text-align: center;
+    }
+    .section-form-button {
+      text-align: center;
+    }
+    .register-link {
+      color: #212529;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+}
+
+.section-dashboard {
+  .section-dashboard-body {
+    width: 90%;
+    margin: 10px auto;
+    .section-dashboard-header {
+      padding: 50px 0;
+    }
+    .section-moviedetails-body {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 25px;
+
+      display: flex;
+      z-index: 99;
+      color: #fff;
+      margin: 10px;
+      .section-moviedetails-body-image {
+        min-width: 200px;
+
+        border-radius: 25px;
+        img {
+          border-radius: 25px;
+          height: 100%;
+          max-width: 100%;
+          max-height: 300px;
+        }
+      }
+      .section-moviedetails-body-text {
+        min-width: 400px;
+        padding: 15px;
+        .section-moviedetails-title-primary {
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+        .section-moviedetails-title-secondary {
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+      }
+      .section-movie-details-vote {
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.section-featured {
+  width: 90%;
+  margin: 0 auto;
+
+  &-body {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    &-article {
+      margin: 20px;
+      width: 250px;
+
+      &-image {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 2px -2px 52px -27px rgba(0, 0, 0, 0.75);
+      }
+      &-info {
+        h3 {
+          margin-top: 10px;
+          padding: 5px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: black;
+        }
+        a {
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  background-color: #212529;
+  text-align: center;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}

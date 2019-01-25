@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
@@ -54,53 +55,59 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form
-        noValidate
-        className="mx-auto col-md-6 mt-5"
-        onSubmit={this.onSubmit}
-      >
-        <h2>Register</h2>
-        <TextFieldGroup
-          name="name"
-          value={this.state.name}
-          type="text"
-          placeholder="Name"
-          onChange={this.onChange}
-          error={errors.name}
-          labels="Your name"
-        />
-        <TextFieldGroup
-          name="email"
-          value={this.state.email}
-          type="email"
-          placeholder="Email"
-          onChange={this.onChange}
-          error={errors.email}
-          labels="Enter email"
-        />
-        <TextFieldGroup
-          name="password"
-          value={this.state.password}
-          type="password"
-          placeholder="Password"
-          onChange={this.onChange}
-          error={errors.password}
-          labels="Enter password"
-        />
-        <TextFieldGroup
-          name="password2"
-          value={this.state.password2}
-          type="password"
-          placeholder="Confirm password"
-          onChange={this.onChange}
-          error={errors.password2}
-          labels="Confirm password"
-        />
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <section className="section-form">
+        <form
+          noValidate
+          className="section-form-input"
+          onSubmit={this.onSubmit}
+        >
+          <h2 className="section-form-title">Register</h2>
+          <TextFieldGroup
+            name="name"
+            value={this.state.name}
+            type="text"
+            placeholder="Name"
+            onChange={this.onChange}
+            error={errors.name}
+            labels="Your name"
+          />
+          <TextFieldGroup
+            name="email"
+            value={this.state.email}
+            type="email"
+            placeholder="Email"
+            onChange={this.onChange}
+            error={errors.email}
+            labels="Enter email"
+          />
+          <TextFieldGroup
+            name="password"
+            value={this.state.password}
+            type="password"
+            placeholder="Password"
+            onChange={this.onChange}
+            error={errors.password}
+            labels="Enter password"
+          />
+          <TextFieldGroup
+            name="password2"
+            value={this.state.password2}
+            type="password"
+            placeholder="Confirm password"
+            onChange={this.onChange}
+            error={errors.password2}
+            labels="Confirm password"
+          />
+          <div className="section-form-button">
+            <button type="submit" className="button button-red">
+              Submit
+            </button>
+            <Link to="/login" className="register-link">
+              <p>Already have an account?</p>
+            </Link>
+          </div>
+        </form>
+      </section>
     );
   }
 }
