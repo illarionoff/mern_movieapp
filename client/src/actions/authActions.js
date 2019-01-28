@@ -68,3 +68,23 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser({}));
   dispatch(clearMyMovies());
 };
+
+// Delete account and user
+export const deleteAccount = () => dispatch => {
+  if (window.confirm("Are you sure?")) {
+    axios
+      .delete("/api/users/")
+      .then(res =>
+        dispatch({
+          type: SET_CURRENT_USER,
+          payload: {}
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
+};

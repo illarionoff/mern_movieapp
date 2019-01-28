@@ -9,7 +9,6 @@ import PrivateRoute from "./components/common/PrivateRoute";
 
 // Actions
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-import { clearCurrentProfile } from "./actions/profileActions";
 
 // Store
 import store from "./store";
@@ -21,8 +20,7 @@ import Footer from "./components/layout/Footer";
 import Login from "./components/layout/auth/Login";
 import Register from "./components/layout/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
-import CreateProfile from "./components/create-profile/CreateProfile";
-import EditProfile from "./components/edit-profile/EditProfile";
+
 import MovieDetails from "./components/layout/movies/MovieDetails";
 
 // CSS
@@ -41,8 +39,7 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
-    // Clear current profile
-    store.dispatch(clearCurrentProfile());
+
     // Redirect to login
     window.location.href = "/login";
   }
@@ -62,20 +59,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/create-profile"
-                  component={CreateProfile}
-                />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/edit-profile"
-                  component={EditProfile}
-                />
-              </Switch>
+
               <Switch>
                 <Route exact path="/details" component={MovieDetails} />
               </Switch>

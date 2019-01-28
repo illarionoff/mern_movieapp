@@ -12,14 +12,12 @@ import {
   CLEAR_SEARCH_RESULTS
 } from "./types";
 
-import { getCurrentProfile } from "../actions/profileActions";
-
 // GEt My movies
 export const getMyMovies = () => dispatch => {
   axios
-    .get("api/profile/movies/all")
+    .get("api/users/movies/all")
     .then(res => {
-      console.log(res.data.movies);
+      console.log(res);
       dispatch({
         type: GET_MY_MOVIES,
         payload: res.data.movies
@@ -65,7 +63,7 @@ export const setDetailsMovie = movie => {
 export const addMovieToCollection = movie => dispatch => {
   console.log(movie);
   axios
-    .post("api/profile/movies", movie)
+    .post("api/users/movies", movie)
     .then(res => {
       dispatch({
         type: ADD_MOVIE,
@@ -73,7 +71,6 @@ export const addMovieToCollection = movie => dispatch => {
       });
 
       dispatch(getMyMovies());
-      dispatch(getCurrentProfile());
     })
     .catch(err =>
       dispatch({
@@ -86,7 +83,7 @@ export const addMovieToCollection = movie => dispatch => {
 // Remove movie from collection
 export const removeMovieFromCollection = movie_id => dispatch => {
   axios
-    .delete(`api/profile/movies/${movie_id}`)
+    .delete(`api/users/movies/${movie_id}`)
     .then(res => {
       dispatch({
         type: REMOVE_MOVIE,
@@ -94,7 +91,6 @@ export const removeMovieFromCollection = movie_id => dispatch => {
       });
 
       dispatch(getMyMovies());
-      dispatch(getCurrentProfile());
     })
     .catch(err =>
       dispatch({

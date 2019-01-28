@@ -5,7 +5,6 @@ const passport = require("passport");
 
 // Movie model
 const Movie = require("../../Models/Movie");
-const Profile = require("../../Models/Profile");
 
 // Vaidation
 const validateMovieInput = require("../../validation/movie");

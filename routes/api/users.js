@@ -12,6 +12,9 @@ const User = require("../../Models/User");
 // JWT Secret or Key
 const secret = require("../../config/keys").secretOrKey;
 
+// Movie Schema
+const Movie = require("../../Models/Movie");
+
 // @route GET api/users/test
 // @desc Tests users route
 // @access Public
@@ -112,9 +115,90 @@ router.get(
     // res.json(req.user);
     res.json({
       id: req.user.id,
-      name: req.user.email,
+      name: req.user.name,
       email: req.user.email
     });
+  }
+);
+
+// @route DELETE api/users/
+// @desc Return current user
+// @access Private
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOneAndRemove({ _id: req.user.id }).then(() =>
+      res.json({ success: true })
+    );
+  }
+);
+
+// @route GET api/users/movies/all
+// @desc Return all movies
+// @access Private
+router.get(
+  "/movies/all",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // res.json(req.user);
+    res.json({
+      movies: req.user.movies
+    });
+  }
+);
+
+// @route POST api/users/movies/all
+// @desc Add new movie
+// @access Private
+router.post(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const newMovie = new Movie({
+      adult: req.body.adult,
+      backdrop_path: req.body.backdrop_path,
+      movie_id: req.body.id,
+      original_language: req.body.original_language,
+      original_title: req.body.original_title,
+      overview: req.body.overview,
+      popularity: req.body.popularity,
+      poster_path: req.body.poster_path,
+      release_date: req.body.release_date,
+      title: req.body.title,
+      video: req.body.video,
+      vote_average: req.body.vote_average,
+      vote_count: req.body.vote_count
+    });
+
+    // console.log(newMovie);
+    req.user.movies.unshift(newMovie);
+    req.user
+      .save()
+      .then(user => res.json(user))
+      .catch(err => console.log(err));
+  }
+);
+
+// @route DELETE api/users/movies/:movie_id
+// @desc Delete single movie
+// @access Private
+router.delete(
+  "/movies/:movie_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.user.id })
+      .then(user => {
+        //  Get remove index
+        const removeIndex = user.movies
+          .map(movie => movie.movie_id)
+          .indexOf(req.params.movie_id);
+        // Splice out of array
+        user.movies.splice(removeIndex, 1);
+        // Save
+        user.save().then(user => res.json(user));
+      })
+      .catch(err => res.status(404).json(err));
   }
 );
 

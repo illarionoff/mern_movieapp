@@ -3,16 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MovieSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
-  },
   adult: {
     type: Boolean
   },
-
-  id: {
-    type: Number,
+  movie_id: {
+    type: String,
     required: true
   },
   original_language: {

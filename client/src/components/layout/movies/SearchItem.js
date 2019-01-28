@@ -71,14 +71,12 @@ class SearchItem extends Component {
 SearchItem.propTypes = {
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
   onSearchSubmit: PropTypes.func.isRequired,
   setMoviesLoading: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
   movies: state.movies,
   errors: state.errors
 });

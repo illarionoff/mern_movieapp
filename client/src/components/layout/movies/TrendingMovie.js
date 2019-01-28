@@ -109,7 +109,7 @@ TrendingMovie.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
+
   movies: state.movies
 });
 
