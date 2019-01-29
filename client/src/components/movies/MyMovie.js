@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // Redux
 import { connect } from "react-redux";
 
-import { removeMovieFromCollection } from "../../../actions/movieActions";
+import { removeMovieFromCollection } from "../../actions/movieActions";
 
 class MyMovie extends Component {
   render() {

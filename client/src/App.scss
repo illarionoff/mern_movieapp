@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700");
 
+$break-small: 320px;
+$break-medium: 960px;
+$break-large: 1200px;
+
 * {
   padding: 0;
   margin: 0;
@@ -167,7 +171,7 @@ header {
     .form-search {
       width: 75%;
       .input-search {
-        width: 90%;
+        width: calc(100% - 50px);
         height: 50px;
         border: 1px solid rgb(175, 175, 175);
         border-top-left-radius: 100px;
@@ -181,7 +185,6 @@ header {
         border: 1px solid rgb(175, 175, 175);
         border-top-right-radius: 100px;
         border-bottom-right-radius: 100px;
-        width: 10%;
       }
     }
   }
@@ -199,39 +202,29 @@ header {
 }
 
 .section-moviedetails {
-  height: 100vh;
   width: 100%;
-
+  height: 100%;
+  min-height: 100vh;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  position: relative;
-  .back-button {
-    z-index: 100;
-    position: absolute;
-    top: 75px;
-    left: 75px;
-  }
-  .section-moviedetails-back {
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-    filter: blur(6px);
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .section-moviedetails-body {
-    background: rgba(0, 0, 0, 0.6);
+    margin: 75px 0;
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 25px;
-    position: absolute;
+
     display: flex;
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    height: 100%;
+    @media screen and (max-width: 640px) {
+      display: block;
+      width: 300px;
+    }
+
     z-index: 99;
     color: #fff;
     .section-moviedetails-body-image {
@@ -240,21 +233,42 @@ header {
       border-radius: 25px;
       img {
         border-radius: 25px;
-        height: 100%;
-        max-width: 100%;
-        max-height: 300px;
+        max-height: 100%;
+        min-width: 100%;
+
+        @media screen and (max-width: 640px) {
+          height: auto;
+          width: 100%;
+          padding: 10px;
+        }
       }
     }
     .section-moviedetails-body-text {
-      min-width: 400px;
       padding: 15px;
+
+      width: 480px;
+      @media screen and (max-width: 960px) {
+        width: 100%;
+      }
       .section-moviedetails-title-primary {
+        @media screen and (max-width: 960px) {
+          font-size: 1rem;
+          font-weight: 600;
+        }
         font-size: 1.5rem;
         font-weight: 600;
       }
       .section-moviedetails-title-secondary {
-        font-size: 0.8rem;
-        font-weight: 600;
+        @media screen and (max-width: 960px) {
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+        p {
+          @media screen and (max-width: 960px) {
+            font-size: 0.8rem;
+            width: 100%;
+          }
+        }
       }
     }
     .section-movie-details-vote {
@@ -277,7 +291,6 @@ header {
   background-size: cover;
   background-position: top;
 
-  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -310,6 +323,11 @@ header {
   .section-dashboard-body {
     width: 90%;
     margin: 10px auto;
+    @media screen and (max-width: 960px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
     .section-dashboard-header {
       padding: 50px 0;
     }
@@ -321,6 +339,10 @@ header {
       z-index: 99;
       color: #fff;
       margin: 10px;
+      @media screen and (max-width: 960px) {
+        display: block;
+        width: 300px;
+      }
       .section-moviedetails-body-image {
         min-width: 200px;
 
@@ -330,11 +352,19 @@ header {
           height: 100%;
           max-width: 100%;
           max-height: 300px;
+          @media screen and (max-width: 960px) {
+            width: 100%;
+            max-height: 100%;
+            padding: 10px;
+          }
         }
       }
       .section-moviedetails-body-text {
-        min-width: 400px;
+        max-width: 960px;
         padding: 15px;
+        @media screen and (max-width: 960px) {
+          width: 100%;
+        }
         .section-moviedetails-title-primary {
           font-size: 1.5rem;
           font-weight: 600;
@@ -392,13 +422,20 @@ header {
 
 footer {
   background-color: #212529;
-  text-align: center;
-  height: 75px;
+  box-sizing: border-box;
+  padding: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+  justify-content: space-between;
   align-items: center;
   color: white;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
+}
+
+.section__generic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }

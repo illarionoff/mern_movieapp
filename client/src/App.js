@@ -17,11 +17,12 @@ import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Main from "./components/layout/Main";
 import Footer from "./components/layout/Footer";
-import Login from "./components/layout/auth/Login";
-import Register from "./components/layout/auth/Register";
+import My404Component from "./components/layout/My404Component";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 
-import MovieDetails from "./components/layout/movies/MovieDetails";
+import MovieDetails from "./components/movies/MovieDetails";
 
 // CSS
 import "./App.scss";
@@ -52,21 +53,22 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path="/" component={Main} />
+
             <React.Fragment>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
               <Switch>
+                <Route exact path="/" component={Main} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/details" component={MovieDetails} />
+                <Route path="*" component={My404Component} />
               </Switch>
 
-              <Switch>
-                <Route exact path="/details" component={MovieDetails} />
-              </Switch>
+              <Switch />
             </React.Fragment>
+            <Footer />
           </div>
         </Router>
-        <Footer />
       </Provider>
     );
   }

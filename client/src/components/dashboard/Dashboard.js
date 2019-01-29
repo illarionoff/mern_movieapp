@@ -5,7 +5,7 @@ import { deleteAccount } from "../../actions/authActions";
 import { getMyMovies } from "../../actions/movieActions";
 
 // Components
-import MyMoviesList from "../layout/movies/MyMoviesList";
+import MyMoviesList from "../movies/MyMoviesList";
 import DashboardHeader from "./DashboardHeader";
 
 class Dashboard extends Component {
@@ -24,9 +24,8 @@ class Dashboard extends Component {
       <section className="section-dashboard">
         <div>
           <DashboardHeader user={user} onDeleteClick={this.onDeleteClick} />
-
+          <h2 className="section-dashboard-header">Your Movie Collection</h2>
           <div className="section-dashboard-body">
-            <h2 className="section-dashboard-header">Your Movie Collection</h2>
             <MyMoviesList />
           </div>
         </div>

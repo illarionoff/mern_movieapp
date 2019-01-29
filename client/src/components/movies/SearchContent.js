@@ -7,7 +7,7 @@ import TrendingMovie from "./TrendingMovie";
 import {
   clearSearchResults,
   setMoviesLoading
-} from "../../../actions/movieActions";
+} from "../../actions/movieActions";
 
 class SearchContent extends Component {
   onClickEvent = () => {

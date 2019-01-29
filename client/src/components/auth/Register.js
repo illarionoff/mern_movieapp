@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
 // TextFieldGroup
-import TextFieldGroup from "../../common/TextFieldGroup";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 // Redux
 import { connect } from "react-redux";
-import { loginUser } from "../../../actions/authActions";
+import { registerUser } from "../../actions/authActions";
 
-class Login extends Component {
+class Register extends Component {
   state = {
+    name: "",
     email: "",
     password: "",
+    password2: "",
     errors: {}
   };
 
@@ -22,10 +25,8 @@ class Login extends Component {
       this.props.history.push("/");
     }
   }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -41,11 +42,14 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const user = {
+    const newUser = {
+      name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2
     };
-    this.props.loginUser(user);
+    console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
@@ -57,7 +61,16 @@ class Login extends Component {
           className="section-form-input"
           onSubmit={this.onSubmit}
         >
-          <h2 className="section-form-title">Login</h2>
+          <h2 className="section-form-title">Register</h2>
+          <TextFieldGroup
+            name="name"
+            value={this.state.name}
+            type="text"
+            placeholder="Name"
+            onChange={this.onChange}
+            error={errors.name}
+            labels="Your name"
+          />
           <TextFieldGroup
             name="email"
             value={this.state.email}
@@ -65,7 +78,7 @@ class Login extends Component {
             placeholder="Email"
             onChange={this.onChange}
             error={errors.email}
-            labels="Email address"
+            labels="Enter email"
           />
           <TextFieldGroup
             name="password"
@@ -74,14 +87,23 @@ class Login extends Component {
             placeholder="Password"
             onChange={this.onChange}
             error={errors.password}
-            labels="Your password"
+            labels="Enter password"
+          />
+          <TextFieldGroup
+            name="password2"
+            value={this.state.password2}
+            type="password"
+            placeholder="Confirm password"
+            onChange={this.onChange}
+            error={errors.password2}
+            labels="Confirm password"
           />
           <div className="section-form-button">
-            <button type="submit" className="button button-green">
+            <button type="submit" className="button button-red">
               Submit
             </button>
-            <Link to="/register" className="register-link">
-              <p>Create account</p>
+            <Link to="/login" className="register-link">
+              <p>Already have an account?</p>
             </Link>
           </div>
         </form>
@@ -90,10 +112,10 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  loginUser: PropTypes.func.isRequired
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -103,5 +125,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
-)(Login);
+  { registerUser }
+)(withRouter(Register));

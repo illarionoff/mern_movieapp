@@ -9,7 +9,7 @@ import {
   setDetailsMovie,
   addMovieToCollection,
   removeMovieFromCollection
-} from "../../../actions/movieActions";
+} from "../../actions/movieActions";
 
 class TrendingMovie extends Component {
   onClick = e => {

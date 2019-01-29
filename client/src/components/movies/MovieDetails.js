@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import isEmpty from "../../../validation/is-empty";
+import isEmpty from "../../validation/is-empty";
 import { Redirect } from "react-router-dom";
 import {
   addMovieToCollection,
   removeMovieFromCollection
-} from "../../../actions/movieActions";
+} from "../../actions/movieActions";
 
 import PropTypes from "prop-types";
 
@@ -69,19 +69,12 @@ export class MovieDetails extends Component {
       }
 
       return (
-        <section className="section-moviedetails">
-          <div className="back-button">
-            <button className="button button-red" onClick={this.back}>
-              Back
-            </button>
-          </div>
-
-          <div
-            className="section-moviedetails-back"
-            style={{
-              background: `url("http://image.tmdb.org/t/p/w1280/${backdrop_path}") no-repeat center center / cover`
-            }}
-          />
+        <section
+          className="section-moviedetails"
+          style={{
+            background: `url("http://image.tmdb.org/t/p/w1280/${backdrop_path}") no-repeat center center / cover`
+          }}
+        >
           <div className="section-moviedetails-body">
             <div className="section-moviedetails-body-image">
               <img
@@ -103,6 +96,9 @@ export class MovieDetails extends Component {
             <div className="section-movie-details-vote">
               <h1>{vote_average}</h1>
               {componentButtons}
+              <button className="button button-red" onClick={this.back}>
+                Back
+              </button>
             </div>
           </div>
         </section>

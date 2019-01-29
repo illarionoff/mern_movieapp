@@ -6,15 +6,18 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import axios from "axios";
 import TrendingMovie from "./TrendingMovie";
 
+const API_KEY = `${process.env.REACT_APP_MOVIE_API_KEY}`;
+
 class TrendingList extends Component {
   state = {
     top_movies: []
   };
 
   componentDidMount() {
+    console.log(process.env.REACT_APP_MOVIE_API_KEY);
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=cbf8a5918204c1c55f4c7ce039c99036&language=en-US&page=1"
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       )
       .then(res => {
         this.setState({

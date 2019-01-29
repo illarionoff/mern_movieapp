@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import {
-  onSearchSubmit,
-  setMoviesLoading
-} from "../../../actions/movieActions";
+import { onSearchSubmit, setMoviesLoading } from "../../actions/movieActions";
 
 import SearchContent from "./SearchContent";
 
 // Spinner
-import Loading from "../../common/Loading";
+import Loading from "../common/Loading";
 
 class SearchItem extends Component {
   state = {
